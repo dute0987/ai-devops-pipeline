@@ -1,10 +1,7 @@
-import os
-
 print("AI Code Review Started")
 
-files = os.popen("git diff --name-only HEAD~1").read()
+# Simulate finding a critical issue
+print("CRITICAL ISSUE FOUND: Hardcoded password detected")
 
-print("Changed Files:")
-print(files)
-
-print("AI Review Completed")
+# Fail the pipeline
+exit(1)
