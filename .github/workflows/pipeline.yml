@@ -1,0 +1,32 @@
+name: AI DevOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        pip install flask
+        pip install openai==0.28
+
+    - name: Run AI Code Review
+      run: python ai/ai_review.py
+
+    - name: Build Docker Image
+      run: docker build -t ai-devops-app .
+
+    - name: Run Container
+      run: docker run -d -p 5000:5000 ai-devops-app
